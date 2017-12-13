@@ -1,6 +1,7 @@
+require 'pry'
 class User
-  attr_reader :name,
-              :jokes
+  attr_reader   :name
+  attr_accessor :jokes
 
   def initialize(name)
     @name = name
@@ -9,5 +10,9 @@ class User
 
   def learn(joke)
     @jokes << joke
+  end
+
+  def tell(user, joke)
+    user.jokes << joke if @jokes.include?(joke)
   end
 end
