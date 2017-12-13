@@ -15,4 +15,10 @@ class User
   def tell(user, joke)
     user.jokes << joke if @jokes.include?(joke)
   end
+
+  def perform_routine_for(user)
+    @jokes.each do |joke|
+      user.jokes << joke
+    end
+  end
 end

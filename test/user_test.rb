@@ -60,4 +60,25 @@ class UserTest < Minitest::Test
     assert_equal [joke], result
     assert_equal 1, result.count
   end
+
+  def test_perform_routine_lets_user_share_all_jokes_at_once
+    joke_1 = Joke.new({ id: 1,
+                    question: "Why did the strawberry cross the road?",
+                    answer: "Because his mother was in a jam."})
+
+    joke_2 = Joke.new({ id: 2,
+                        question: "How do you keep a lion from charging?",
+                        answer: "Take away its credit cards."})
+
+    ilana = User.new("Ilana")
+    josh = User.new("Josh")
+    ilana.learn(joke_1)
+    ilana.learn(joke_2)
+    ilana.perform_routine_for(josh)
+
+    result = josh.jokes
+
+    assert_equal [joke_1, joke_2], result
+    assert_equal 2, result.count
+  end
 end
