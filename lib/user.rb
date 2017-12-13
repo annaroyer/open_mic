@@ -1,4 +1,4 @@
-require 'pry'
+require 'csv'
 class User
   attr_reader   :name
   attr_accessor :jokes
@@ -19,6 +19,16 @@ class User
   def perform_routine_for(user)
     @jokes.each do |joke|
       user.jokes << joke
+    end
+  end
+
+  def learn_routine(joke_manual)
+    CSV.foreach(joke_manual, headers:true) do |row|
+      joke = {}
+      joke[:id] = row[0]
+      joke[:question] = row[1]
+      joke[:answer] = row[2]
+      learn(joke)
     end
   end
 end

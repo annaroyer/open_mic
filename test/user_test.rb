@@ -61,7 +61,7 @@ class UserTest < Minitest::Test
     assert_equal 1, result.count
   end
 
-  def test_perform_routine_lets_user_share_all_jokes_at_once
+  def test_performs_routine_to_share_all_jokes_at_once
     joke_1 = Joke.new({ id: 1,
                     question: "Why did the strawberry cross the road?",
                     answer: "Because his mother was in a jam."})
@@ -80,5 +80,14 @@ class UserTest < Minitest::Test
 
     assert_equal [joke_1, joke_2], result
     assert_equal 2, result.count
+  end
+
+  def test_learns_routine_to_learn_multiple_jokes_at_once
+    casey = User.new("Casey")
+    casey.learn_routine('./jokes.csv')
+
+    result = casey.jokes.count
+
+    assert_equal 100, result
   end
 end
